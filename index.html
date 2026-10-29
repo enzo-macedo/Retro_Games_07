@@ -1,0 +1,155 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>RetroGames | Biblioteca Retrô</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="cabecalho">
+        <div class="logo">
+            <span class="icone">🎮</span>
+            <h1>Pactro<span> Games</span></h1>
+        </div>
+
+        <p>Sua juventude de volta.</p>
+    </header>
+
+    <main class="container">
+
+        <section class="titulo-secao">
+            <div>
+                <span class="subtitulo">COLECIONE CLÁSSICOS</span>
+                <h2>Jogos em <span>destaque</span></h2>
+            </div>
+
+            <button id="btnCadastrar" class="btn-cadastrar">
+                + Cadastrar Jogo
+            </button>
+        </section>
+
+        <section class="biblioteca">
+
+            <div id="listaDiscos" class="lista-jogos"></div>
+
+            <div id="mensagemVazia" class="mensagem-vazia">
+                <span>🕹️</span>
+                <h3>Nenhum jogo cadastrado</h3>
+                <p>Adicione seu primeiro clássico à biblioteca!</p>
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer class="rodape">
+        <p>© 2026 RetroGames — Todos os direitos reservados.</p>
+        <span>INSERT COIN • START GAME</span>
+    </footer>
+
+    <dialog id="modalCadastro" class="modal">
+
+        <form id="formDisco">
+
+            <div class="modal-cabecalho">
+                <div>
+                    <span class="subtitulo">NOVA ADIÇÃO</span>
+                    <h2>Cadastrar <span>jogo</span></h2>
+                </div>
+
+                <button
+                    type="button"
+                    id="btnCancelar"
+                    class="btn-fechar"
+                    aria-label="Fechar formulário"
+                >×</button>
+            </div>
+
+            <label for="album">Nome do jogo</label>
+            <input
+                type="text"
+                id="album"
+                placeholder="Ex.: Super Mario World"
+                required
+            >
+
+            <label for="artista">Empresa / Desenvolvedora</label>
+            <input
+                type="text"
+                id="artista"
+                placeholder="Ex.: Nintendo"
+                required
+            >
+
+            <label for="genero">Data de lançamento</label>
+            <input
+                type="date"
+                id="genero"
+                required
+            >
+
+            <label for="imagem">URL da imagem da capa</label>
+            <input
+                type="url"
+                id="imagem"
+                placeholder="https://exemplo.com/capa.jpg"
+                required
+            >
+
+            <label for="preco">Preço (R$)</label>
+            <input
+                type="number"
+                id="preco"
+                placeholder="199.90"
+                min="0"
+                step="0.01"
+                required
+            >
+
+            <div class="botoes-modal">
+                <button
+                    type="button"
+                    id="cancelarSecundario"
+                    class="btn-secundario"
+                >
+                    Cancelar
+                </button>
+
+                <button type="submit" class="btn-cadastrar">
+                    Cadastrar jogo
+                </button>
+            </div>
+
+        </form>
+
+    </dialog>
+
+    <script src="script.js"></script>
+
+    <script>
+        // Exibe a mensagem quando a biblioteca está vazia.
+        const lista = document.getElementById("listaDiscos");
+        const mensagem = document.getElementById("mensagemVazia");
+
+        function atualizarMensagem() {
+            mensagem.hidden = lista.children.length > 0;
+        }
+
+        const observador = new MutationObserver(atualizarMensagem);
+        observador.observe(lista, { childList: true });
+
+        atualizarMensagem();
+
+        document.getElementById("cancelarSecundario")
+            .addEventListener("click", () => {
+                document.getElementById("modalCadastro").close();
+            });
+    </script>
+
+</body>
+</html>
